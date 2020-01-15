@@ -4,13 +4,14 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    if current_user.admin?
-      @orders = Order.paginate(page: params[:page], per_page: 5)
-    else
-      if current_user == !current_user.admin?
-        @orders = Order.all
-      end
-    end
+    #if current_user.admin?
+      @orders = Order.all
+    #else
+      # if current_user == !current_user.admin?
+      #   @orders = Order.all
+      # end
+      #redirect_to root_path
+    #end
   end
 
   # GET /orders/1
@@ -22,6 +23,7 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     @order.order_products.new
+    @order.addresses.new
   end
 
   # GET /orders/1/edit
@@ -76,7 +78,7 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:order_no, :tracking_no, :purchase_total, :order_type, :user_id, order_products_attributes: [:quantity, :product_id])     
+      params.require(:order).permit(:order_no, :tracking_no, :purchase_total, :order_type, :user_id, order_products_attributes: [:quantity, :product_id],addresses_attributes: [:address_type, :land_mark, :street, :city, :state, :zip, :user_id])     
     end
 end
 
