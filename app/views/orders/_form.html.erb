@@ -1,0 +1,60 @@
+<div class="col-md-6 col-md-offset-3">
+
+  <%= form_with(model: order, local: true) do |form| %>
+    <% if order.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+        <ul>
+          <% order.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label :order_no %>
+      <%= form.number_field :order_no, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :tracking_no %>
+      <%= form.number_field :tracking_no, :value => "#{rand(10..1000)}",:readonly => true, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :purchase_total %>
+      <%= form.text_field :purchase_total, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :order_type %>
+      <%= form.text_field :order_type, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.hidden_field :user_id, :value=>current_user.id %>
+    </div>
+    
+    
+
+
+    <%= form.fields_for :order_product do |product_fields| %>
+      <div class="form-group">
+        <div class="field">
+          <%= product_fields.label :quantity %>
+          <%= product_fields.text_field :quantity, class:"form-control" %>
+        </div>
+        <div class="field" >
+          <%= product_fields.label :name %>
+          <%= product_fields.select :product_id,options_for_select(Product.all.collect{|c| [c.name]}), class: "form-control" %>
+        </div>
+      </div>
+      <% end %> 
+
+    <div class="actions">
+      <%= form.submit "Save", class:'btn btn-success' %>
+    </div>
+  <% end %>
+</div>
