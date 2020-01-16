@@ -1,5 +1,4 @@
 <div class="col-md-6 col-md-offset-3">
-
   <%= form_with(model: order, local: true) do |form| %>
     <% if order.errors.any? %>
       <div id="error_explanation">
@@ -37,23 +36,24 @@
       <%= form.hidden_field :user_id, :value=>current_user.id %>
     </div>
 
-    <%= form.fields_for :order_products do |product_fields| %>
+      <!-- Accept Data For Order Product -->
+      <%= form.fields_for :order_products do |product_fields| %>
         <div class="form-group">
           <%= product_fields.label :quantity %>
           <%= product_fields.text_field :quantity, class:"form-control" %>
         </div>
         <div class="form-group" >
           <%= product_fields.label :name %>
-          <%= product_fields.select :product_id,options_for_select(Product.all.collect{|c| [c.name]}), class: "form-control" %>
+          <%= product_fields.select :product_id,options_for_select(Product.all.collect{|c| [c.name, c.id]}), class: "form-control" %>
         </div>
       <% end %> 
-
-      <%= form.fields_for :addresses do |address_fields| %>
+      
+      <!-- Accept Data For Address -->
+        <%= form.fields_for :addresses do |address_fields| %>
         <div class="form-group" >
           <%= address_fields.label :address_type %>
           <%= address_fields.select :address_type,options_for_select(["Billing Address","Shipping Address"]), class: "form-control" %>
         </div>
-
         <div class="form-group">
             <%= address_fields.label :land_mark %>
             <%= address_fields.text_field :land_mark, class:"form-control" %>
@@ -77,10 +77,9 @@
         <div class="form-group">
           <%= address_fields.hidden_field :user_id, :value=>current_user.id %>
         </div> 
-      <% end %>
-
-    <div class="actions">
-      <%= form.submit "Save", class:'btn btn-success' %>
-    </div>
+        <% end %>
+        <div class="actions">
+          <%= form.submit "Save", class:'btn btn-success' %>
+        </div>
   <% end %>
 </div>

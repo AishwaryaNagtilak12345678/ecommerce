@@ -4,6 +4,7 @@ class OrderProductsController < ApplicationController
   # GET /order_products
   # GET /order_products.json
   def index
+    #show order_products to only admin
     if current_user.admin?
       @order_products = OrderProduct.all
     else

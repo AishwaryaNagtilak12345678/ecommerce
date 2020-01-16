@@ -24,6 +24,20 @@
     <%= @order.user_id %>
   </p>
 
+  <p>
+    <strong>City:</strong>
+    <%= order=(Order.find_by(params[@order.user_id]).addresses.first.city)%>
+  </p>
+
+  <p>
+    <strong>Product Name:</strong>
+    <%= product=(Order.find_by(params[@order.user_id]).products.first.name)%>
+  </p>
+
+  <p>
+    <strong>Product Quantity:</strong>
+    <%= product=(Order.find_by(params[@order.user_id]).order_products.first.quantity)%>
+  </p>
   <%= link_to 'Edit', edit_order_path(@order) %> |
   <%= link_to 'Back', orders_path %>
 </div>
