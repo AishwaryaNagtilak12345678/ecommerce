@@ -18,26 +18,38 @@
     <strong>Order type:</strong>
     <%= @order.order_type %>
   </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= @order.user_id %>
-  </p>
-
+  
   <p>
     <strong>City:</strong>
     <%= order=(Order.find_by(params[@order.user_id]).addresses.first.city)%>
   </p>
 
   <p>
-    <strong>Product Name:</strong>
-    <%= product=(Order.find_by(params[@order.user_id]).products.first.name)%>
+   <% @sum=0 %>
+        <% @order.order_products.each do |order| %>
+          <p>
+            <strong>Product Name:</strong>
+            <%= order.product.name %>
+          </p>
+
+          <p>
+            <strong>Product Price:</strong>
+            <%= order.product.price %>
+          </p>
+
+          <p>
+            <strong>Product Quantity:</strong>
+            <%= order.quantity %>
+          </p>
+
+          <p>
+            <strong>Total:</strong>
+            <%= @sum += (order.product.price * order.quantity) %>
+          </p>
+
+        <% end %>
   </p>
 
-  <p>
-    <strong>Product Quantity:</strong>
-    <%= product=(Order.find_by(params[@order.user_id]).order_products.first.quantity)%>
-  </p>
   <%= link_to 'Edit', edit_order_path(@order) %> |
   <%= link_to 'Back', orders_path %>
 </div>

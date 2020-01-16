@@ -20,6 +20,7 @@
     <tbody>
       <% @addresses.each do |address| %>
         <tr>
+          <% if current_user.admin? || (current_user.id == address.user_id) %>
           <td><%= address.address_type %></td>
           <td><%= address.land_mark %></td>
           <td><%= address.street %></td>
@@ -31,6 +32,7 @@
           <td><%= link_to 'Show', address %></td>
           <td><%= link_to 'Edit', edit_address_path(address) %></td>
           <td><%= link_to 'Destroy', address, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
