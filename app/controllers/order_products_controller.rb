@@ -19,7 +19,11 @@ class OrderProductsController < ApplicationController
 
   # GET /order_products/new
   def new
-    @order_product = OrderProduct.new
+    if current_user.admin?
+      @order_products = OrderProduct.new
+    else
+      redirect_to root_path
+    end
   end
 
   # GET /order_products/1/edit
