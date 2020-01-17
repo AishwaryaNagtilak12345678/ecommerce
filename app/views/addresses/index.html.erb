@@ -27,7 +27,7 @@
           <td><%= address.city %></td>
           <td><%= address.state %></td>
           <td><%= address.zip %></td>
-          <td><%= address.user_id %></td>
+          <td><%= address.user.username %></td>
           <td><%= address.order_id %></td>
           <td><%= link_to 'Show', address %></td>
           <td><%= link_to 'Edit', edit_address_path(address) %></td>
