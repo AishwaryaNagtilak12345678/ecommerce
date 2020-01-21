@@ -25,11 +25,13 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     @order.order_products.new
-    @order.addresses.new
+    #@order.addresses.new
+    @order.addresses.build
   end
 
   # GET /orders/1/edit
   def edit
+    @order.addresses.build
   end
 
   # POST /orders
