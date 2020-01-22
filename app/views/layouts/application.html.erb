@@ -6,7 +6,6 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -22,6 +21,24 @@
     <% end %>
 
     <%= yield %>
+    <script>
+    (function() {
+      $(document).on('click', 'form .remove_fields', function(event) {
+        $(this).prev('input[type=hidden]').val('1');
+        $(this).closest('fieldset').hide();
+        return event.preventDefault();
+      });
+
+      $(document).on('click', 'form .add_fields_new', function(event) {
+        var regexp, time;
+        time = new Date().getTime();
+        regexp = new RegExp($(this).data('id'), 'g');
+        $(this).before($(this).data('fields').replace(regexp, time));
+        return event.preventDefault();
+      });
+
+    }).call(this);
+</script>
     
   </body>
 </html>

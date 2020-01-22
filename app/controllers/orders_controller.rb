@@ -24,12 +24,15 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
-    @order.order_products.new
+    @order.order_products.build #new
+    #@order.addresses.new
     @order.addresses.new
   end
 
   # GET /orders/1/edit
   def edit
+   # @order.addresses.build
+
   end
 
   # POST /orders
