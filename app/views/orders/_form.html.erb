@@ -41,7 +41,7 @@
     </div>
 
     <!-- Accept Data For Address -->
-      <%= form.fields_for :addresses do |address_fields| %>
+    <%= form.fields_for :addresses do |address_fields| %>
       <div class="form-group" >
         <%= address_fields.label :address_type %>
         <%= address_fields.select :address_type,options_for_select(["Billing Address","Shipping Address"]), class: "form-control" %>
@@ -69,7 +69,7 @@
       <div class="form-group">
         <%= address_fields.hidden_field :user_id, :value=>current_user.id %>
       </div> 
-      <% end %>
+    <% end %>
 
       <div class="actions">
         <%= form.submit "Save", class:'btn btn-success' %>

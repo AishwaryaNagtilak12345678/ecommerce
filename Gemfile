@@ -15,9 +15,6 @@ gem 'awesome_print'
 
 gem 'will_paginate','3.1.5'
 
-gem 'bootstrap-will_paginate', '1.0.0'
-
-gem 'coffee-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
